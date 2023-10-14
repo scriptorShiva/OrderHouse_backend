@@ -1,0 +1,147 @@
+End points : 
+
+Todo: install packages create server.json
+Todo: create db Connection and set MVC arctitecture.
+Todo: start with routes with app.use() middleware to register it
+Todo: Controllers to add your logic and Services file for class for mutiple functions
+
+for register a user :
+Todo: validate the request
+Todo: authorise the request
+Todo: check if the user is already in the database
+Todo: prepare model
+Todo: store in DB
+Todo: genreate jwt token
+Todo: send response
+
+Todo: Register a user : user register.
+Todo: Login a user : on login server send them jwt token for each user.
+Todo: who am I : get particular user data whose token we get based on login. (/api/me) me: particular user token and able to access its profile
+Todo: About Refresh Token
+Todo: Logout the user
+
+Below endpoints only accessible when you are admin user.
+Todo: Add new product : using multer
+Todo: Update a product
+Todo: Get all product
+Todo: Get single product
+Todo: Delete a  product
+
+npm run dev : for run a script
+npm start : for production
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-  Diffrence between session , local storage , cookie ? 
+    - Session Storage stores data within a single browser session, available as long as the session is active and the browser tab/window is open. It's used for temporary data across page loads within the same session.
+    - Local Storage stores data persistently on the user's device even after the browser is closed. It's suitable for larger amounts of data and can be used for offline functionality.
+    - Cookies are small pieces of data sent from a server to a browser, used for storing information like preferences and tracking data, with an expiration time. They can be read by both server-side and client-side scripts.
+
+* more about cookie illustration
+    A user visits a website.
+    The server responds with the web page content and includes instructions to set a cookie in the response headers.
+    The browser stores the cookie locally on the user's device.
+    In subsequent requests to the same website, the browser includes the relevant cookies in the request headers.
+    The server reads the cookies to personalize the user's experience or perform other actions.
+    Client-side scripts in the browser can also access and manipulate cookies to enhance interactivity.
+    In essence, cookies facilitate communication between the server and the browser, allowing both sides to share information and tailor the user experience.
+
+        1.Sent from a Server to a Browser:
+            Cookies are created and set by a web server. When a user interacts with a website by visiting a web page, submitting a form, or performing some action, the server can include instructions in the response to set cookies in the user's browser.
+            This is typically done using the HTTP response headers. The server specifies the cookie's name, value, expiration time, domain, and other attributes in the response headers. When the browser receives this response, it stores the cookie locally on the user's device.
+
+        2.Read by Both Server-Side and Client-Side Scripts:
+            Cookies can be accessed by both server-side scripts (like those running on the web server) and client-side scripts (like JavaScript running in the browser).
+            When a user makes a subsequent request to the same website, the browser includes any relevant cookies in the request's headers. The server can then read these cookies to gather information about the user's previous interactions or preferences.
+            Similarly, client-side scripts (such as JavaScript) running in the browser can also access cookies. This allows developers to create dynamic behavior based on the information stored in cookies. For example, a website might use JavaScript to display a personalized greeting based on a user's stored preferences in a cookie.
+
+- Headers : Headers in an API (Application Programming Interface) call are key-value pairs sent along with the HTTP request to provide additional information about the request or to modify the behavior of the server when processing the request. Headers are essential for various purposes, such as authentication, content negotiation, and request control. Here are some common headers used in API calls:
+ * Authorization: This header is used to send authentication credentials to the server, typically in the form of an access token or API key. It allows the server to verify the identity of the client making the request and determine whether the client has the necessary permissions to access the requested resource.
+    + Bearer :  "Bearer" refers to a type of token-based authentication. Bearer tokens are a method of sending authentication information from a client (such as a web browser or a mobile app) to a server to access protected resources, like API endpoints or web services.
+                 eg : Authorization: Bearer your-access-token
+
+ * Content-Type: This header specifies the format of the data being sent in the request body. It helps the server understand how to parse and process the data. Common content types include "application/json," "application/xml," and "application/x-www-form-urlencoded."
+    Content-Type: application/json
+ * Accept: The Accept header indicates the desired response format that the client can handle. It tells the server which media types (content types) are acceptable for the response. This header is used for content negotiation.
+    Accept: application/json
+ * User-Agent: This header identifies the client making the request, typically in the form of a user-agent string. It helps servers tailor their responses to the specific client or browser.
+    User-Agent: MyAPIClient/1.0
+ * Cache-Control: The Cache-Control header provides directives to the server and intermediary caches on how to handle caching of the response. It can specify caching rules like "no-cache," "max-age," and "must-revalidate."
+    Cache-Control: no-cache
+ * Cookie: If the API requires session management or maintains state using cookies, the Cookie header is used to send cookies from the client to the server.
+    Cookie: session=abc123
+ * Custom Headers: APIs may also use custom headers for various purposes specific to their functionality. These headers are not standardized and are defined by the API provider. For example, you might see headers like "X-Api-Key" or "X-Requested-With" in some API calls.
+    X-Api-Key: your-api-key
+ * If-Modified-Since: This header can be used to conditionally request a resource from the server only if it has been modified since a certain date and time. It is often used in combination with caching mechanisms.
+    If-Modified-Since: Tue, 01 Sep 2023 00:00:00 GMT            
+
+- - How does token works ?
+ * HTTP is a stateless protocol that means a new request does not remember anything about the previous one
+ 1. Session-based Authentication : statefull way 
+ 2. User Authentication:
+      When a user logs into a website or application, they provide their credentials (e.g., username and password).
+      The server verifies the credentials and, if they are correct, generates an access token and a refresh token.
+   a. Access Token:
+      An access token is a short-lived token (typically valid for a short period, like an hour or less).
+      The access token is used to authenticate the user's requests to access protected resources or perform actions on the website.
+   c. Refresh Token:
+      A refresh token is a long-lived token (valid for a longer duration, like days or weeks).
+      The refresh token is used to obtain a new access token when the current one expires without the user needing to re-enter their credentials.
+   d. Accessing Protected Resources:
+      When the user makes a request to access a protected resource (e.g., viewing a private profile page), they include the access token in the request headers.
+      The server checks the access token's validity and grants access if it's valid and has not expired.
+   e. Token Expiration:
+      Access tokens have a limited lifespan to enhance security. When an access token expires, the user will need to obtain a new one to continue accessing protected resources.
+   f. Refreshing Access Token:
+      If the access token expires, the client (website or app) can use the refresh token to request a new access token from the server.
+      The server verifies the refresh token and issues a new access token if it's valid. The old refresh token may be invalidated or rotated for security reasons.
+   g. Logout or Token Revocation:
+      To log a user out or revoke their access, you have several options:
+         Logout Button: Provide a "Logout" button on the website. When clicked, it clears the user's session on the server and deletes any stored tokens on the client side.
+         Token Blacklisting: Maintain a list of blacklisted tokens on the server. When a user logs out, add their access token or refresh token to the blacklist. Any subsequent requests with these tokens will be rejected.
+         Short Token Lifespan: Reduce the lifespan of access tokens for sensitive operations, making them expire quickly. This can provide an effective way to limit access after a user logs out.
+   h. Token Renewal:
+      Periodically, the client uses the refresh token to obtain new access tokens. This ensures that even if a user doesn't log out, their access tokens will still expire and need to be refreshed.
+      In summary, access tokens and refresh tokens are used to manage user authentication and authorization. When handling token expiration or logout, you can clear user sessions, blacklist tokens, or make tokens expire quickly for added security. The exact implementation details may vary depending on the specific authentication system and framework you're using.
+
+- where to store refresh token? 
+   Server-Side Database:
+      Security: Storing refresh tokens in a server-side database is generally considered more secure because it keeps tokens on a server that is less susceptible to client-side attacks.
+      Control: You have full control over the lifecycle of refresh tokens, including the ability to revoke them.
+      Scalability: This approach is well-suited for distributed and scalable systems.
+      However, this option adds complexity to your server-side logic and may introduce some latency due to database access.
+
+   Secure HTTP-only Cookies:
+      Security: Storing tokens in HTTP-only cookies on the client-side can be secure, especially when combined with proper security measures like HTTPS and secure cookies.
+      Performance: Since the token is stored client-side, there's no need for server-database interactions during token validation or refresh, potentially improving performance.
+      But, this approach may be vulnerable to Cross-Site Scripting (XSS) attacks if not properly secured. You must use HTTP-only cookies to mitigate this risk.
+
+   In-Memory Caching:
+      Security: Storing tokens in an in-memory cache (e.g., Redis) on the server-side provides a balance between security and performance.
+      Performance: Accessing tokens from memory is faster than database access, but it still provides better security than client-side storage.
+      However, this approach may require additional infrastructure for the cache and is not as secure as a server-side database.
+
+   Token Service (OAuth2 Server):
+      If you're implementing OAuth2 or a similar authentication and authorization framework, you can use a dedicated token service to manage and store refresh tokens securely.
+      This approach is suitable for applications where token management is a core requirement.
+   
+   In practice, many applications adopt a hybrid approach, combining the security of server-side storage with the convenience of client-side storage. For example, you can store the refresh token in a secure HTTP-only cookie on the client side and maintain a reference to the token in a server-side database for revocation purposes. This approach provides a balance between security and performance.
+
+
+   In Our Project : what we're doing >>
+      Storing Refresh Token in HttpOnly Cookie:
+
+      The refresh token is securely stored in an HttpOnly cookie on the client-side. This makes it inaccessible to client-side JavaScript.
+      Server-Side API Request:
+
+      When the access token expires, the client (typically a web application) sends a request to the server to obtain a new access token.
+      The server, upon receiving the request, checks for the presence of the refresh token in the HttpOnly cookie.
+      Generating New Tokens:
+
+      If the refresh token is present and valid, the server generates a new pair of access and refresh tokens.
+      The new access token is usually sent back to the client in the response body, allowing the client to continue making authenticated requests.
+      The new refresh token may or may not replace the old refresh token, depending on your security policy.
+      Repeat as Needed:
+
+      This process can be repeated each time the access token expires, allowing the user to maintain their authenticated session without having to re-enter their credentials.
